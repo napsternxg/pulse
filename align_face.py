@@ -13,6 +13,7 @@ import argparse
 from bicubic import BicubicDownSample
 import torchvision
 from shape_predictor import align_face
+from tqdm import tqdm
 
 SHAPE_PREDICTOR_PATH="https://drive.google.com/uc?id=1huhv8PYpNNKbGCLOaYUjOgR1pY5pmbJx"
 
@@ -39,9 +40,8 @@ print("Downloading Shape Predictor")
 f=open_url(args.shape_predictor_path, cache_dir=cache_dir, return_path=True)
 predictor = dlib.shape_predictor(f)
 
-for im in Path(args.input_dir).glob("*.*"):
+for im in tqdm(list(Path(args.input_dir).glob("*.*"))):
     faces = align_face(str(im),predictor)
-
     for i,face in enumerate(faces):
         if(args.output_size):
             factor = 1024//args.output_size
