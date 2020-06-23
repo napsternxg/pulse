@@ -29,12 +29,12 @@ requirements:
     # http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
 """
 
+detector = dlib.get_frontal_face_detector()
+
 def get_landmark(filepath,predictor):
     """get landmark with dlib
     :return: np.array shape=(68, 2)
     """
-    detector = dlib.get_frontal_face_detector()
-
     img = dlib.load_rgb_image(filepath)
     dets = detector(img, 1)
     filepath = Path(filepath)
