@@ -80,6 +80,6 @@ for ref_im, ref_im_name in dataloader:
     else:
         #out_im = model(ref_im,**kwargs)
         for j,(HR,LR) in enumerate(model(ref_im,**kwargs)):
-            for i, (HR_i, LR_i, ref_im_name_i) in enumerate(zip(HR, LR, ref_im_name))::
+            for i, (HR_i, LR_i, ref_im_name_i) in enumerate(zip(HR, LR, ref_im_name)):
                 toPIL(HR_i.cpu().detach().clamp(0, 1)).save(
                     out_path / f"{ref_im_name_i}.png")
